@@ -17,7 +17,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     dashboardBloc = DashboardBloc();
-    dashboardBloc.add(DashboardInitialEvent());
+    //dashboardBloc.add(DashboardInitialEvent());
   }
 
   @override
@@ -29,37 +29,38 @@ class _DashboardScreenState extends State<DashboardScreen> {
       listener: (context, state) {
         if (state is DashboardSearchButtonNavigateState) {
           Navigator.pushNamed(context, AppRoutes.movieInfo);
-        } else if (state is DashboardError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-            ),
-          );
         }
+        //else if (state is DashboardError) {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(
+        //       content: Text(state.message),
+        //     ),
+        //   );
+        // }
       },
       builder: (context, state) {
         print(state.runtimeType.toString());
         switch (state.runtimeType) {
-          case DashboardLoading:
-            return Container(
-              color: Colors.red,
-            );
-          case DashboardSuccess:
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('MovieFlix'),
-                actions: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.search,
-                    ),
-                    onPressed: () {
-                      dashboardBloc.add(DashboardSearchButtonNavigateEvent());
-                    },
-                  )
-                ],
-              ),
-            );
+          // case DashboardLoading:
+          //   return Container(
+          //     color: Colors.red,
+          //   );
+          // case DashboardSuccess:
+          //   return Scaffold(
+          //     appBar: AppBar(
+          //       title: const Text('MovieFlix'),
+          //       actions: [
+          //         IconButton(
+          //           icon: const Icon(
+          //             Icons.search,
+          //           ),
+          //           onPressed: () {
+          //             dashboardBloc.add(DashboardSearchButtonNavigateEvent());
+          //           },
+          //         )
+          //       ],
+          //     ),
+          //   );
 
           default:
             return Container(

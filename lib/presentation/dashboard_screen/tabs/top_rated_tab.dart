@@ -13,33 +13,36 @@ class TopRatedTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
-        if (state is TopRatedSuccess) {
-          return _buildTopRatedContent(context, state);
-        } else if (state is TopRatedError) {
-          return Text(state.errorMessage);
-        } else {
-          return Container(
-            color: Colors.yellow, // Placeholder color
-          );
-        }
+        // if (state is TopRatedSuccess) {
+        //   return _buildTopRatedContent(context, state);
+        // } else if (state is TopRatedError) {
+        //   return Text(state.errorMessage);
+        // } else {
+        //   return Container(
+        //     color: Colors.yellow, // Placeholder color
+        //   );
+        // }
+        return Container(
+          color: Colors.yellow, // Placeholder color
+        );
       },
     );
   }
 
-  Widget _buildTopRatedContent(BuildContext context, TopRatedSuccess state) {
-    if (state is TopRatedLoading) {
-      return const CircularProgressIndicator();
-    } else {
-      return ListView.builder(
-        itemCount: state.topRatedMovies.length,
-        itemBuilder: (context, index) {
-          final movie = state.topRatedMovies[index];
-          return ListTile(
-            title: Text(movie.title),
-            // Other movie details...
-          );
-        },
-      );
-    }
-  }
+  // Widget _buildTopRatedContent(BuildContext context, TopRatedSuccess state) {
+  //   if (state is TopRatedLoading) {
+  //     return const CircularProgressIndicator();
+  //   } else {
+  //     return ListView.builder(
+  //       itemCount: state.topRatedMovies.length,
+  //       itemBuilder: (context, index) {
+  //         final movie = state.topRatedMovies[index];
+  //         return ListTile(
+  //           title: Text(movie.title),
+  //           // Other movie details...
+  //         );
+  //       },
+  //     );
+  //   }
+  // }
 }
