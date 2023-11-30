@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:movieflix/presentation/dashboard_screen/bloc/dashboard_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieflix/presentation/dashboard_screen/tabs/profile_tab.dart';
 import 'package:movieflix/presentation/now_playing/now_playing_page.dart';
+import 'package:movieflix/presentation/profile_screen/profile_screen.dart';
 import 'package:movieflix/presentation/top_rated/top_rated_page.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -48,11 +48,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildBody(DashboardState state) {
     switch (state.runtimeType) {
       case NavigateToNowPlayingState:
-        return const NowPlayingTab();
+        return const NowPlayingPage();
       case NavigateToTopRatedState:
         return const TopRatedPage();
       case NavigateToProfileState:
-        return const ProfileTab();
+        return const ProfilePage();
       default:
         return Container(
           color: Colors.purple,

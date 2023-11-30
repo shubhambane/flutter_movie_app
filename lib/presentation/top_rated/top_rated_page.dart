@@ -43,7 +43,7 @@ class _TopRatedPageState extends State<TopRatedPage> {
                 decoration: InputDecoration(
                   labelText: 'Search',
                   hintText: 'Search for movies...',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -60,59 +60,77 @@ class _TopRatedPageState extends State<TopRatedPage> {
                 itemCount: displayedMovies.length,
                 itemBuilder: (context, index) {
                   final movie = displayedMovies[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/movieInfo',
-                          arguments: movie);
+                  return Dismissible(
+                    key: Key(movie.id.toString()),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      setState(() {
+                        displayedMovies.removeAt(index);
+                      });
                     },
-                    child: Container(
-                      margin: const EdgeInsets.all(8),
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.red,
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                    background: Container(
+                      color: Colors.red,
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.only(right: 16),
+                      child: const Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/movieInfo',
+                            arguments: movie);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(8),
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.red,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
-                                fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    movie.title,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      movie.title,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    movie.overview,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      movie.overview,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 3,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   );

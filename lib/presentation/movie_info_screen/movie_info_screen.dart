@@ -27,7 +27,7 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(bottom: 12),
+              margin: const EdgeInsets.only(bottom: 12),
               height: 500,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -53,6 +53,7 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
                   text: 'Release Date: ',
                   style: const TextStyle(
                     fontSize: 14,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                   children: [
@@ -61,6 +62,7 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
+                        color: Colors.black,
                       ),
                     ),
                   ],
@@ -75,6 +77,7 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                   children: [
                     TextSpan(
@@ -82,6 +85,7 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
+                        color: Colors.black,
                       ),
                     ),
                   ],
