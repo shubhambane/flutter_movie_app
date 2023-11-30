@@ -7,10 +7,8 @@ abstract class DashboardActionState extends DashboardState {}
 
 final class DashboardInitial extends DashboardState {}
 
-class NavigateToNowPalyingState extends DashboardState {}
+class NavigateToNowPlayingState extends DashboardState {}
 
-class NavigateToTopRatedState extends DashboardActionState {}
+class NavigateToTopRatedState extends DashboardState {}
 
-class NavigateToProfileState extends DashboardActionState {}
-
-class DashboardSearchButtonNavigateState extends DashboardActionState {}
+class NavigateToProfileState extends DashboardState {}

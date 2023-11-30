@@ -1,10 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:movieflix/presentation/dashboard_screen/bloc/dashboard_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieflix/presentation/now_playing/now_playing_page.dart';
 import 'package:movieflix/presentation/dashboard_screen/tabs/profile_tab.dart';
-import 'package:movieflix/presentation/dashboard_screen/tabs/top_rated_tab.dart';
-import 'package:movieflix/routes/app_routes.dart';
+import 'package:movieflix/presentation/now_playing/now_playing_page.dart';
+import 'package:movieflix/presentation/top_rated/top_rated_page.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -20,7 +20,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     dashboardBloc = DashboardBloc();
-    dashboardBloc.add(NavigateToNowPalyingEvent());
+    dashboardBloc.add(NavigateToNowPlayingEvent());
   }
 
   @override
@@ -29,30 +29,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
       bloc: dashboardBloc,
       listenWhen: (previous, current) => current is DashboardActionState,
       buildWhen: (previous, current) => current is! DashboardActionState,
-      listener: (context, state) {
-        // if (state is DashboardSearchButtonNavigateState) {
-        //   Navigator.pushNamed(context, AppRoutes.movieInfo);
-        // } else if (state is DashboardError) {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //     SnackBar(
-        //       content: Text(state.message),
-        //     ),
-        //   );
-        // }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
-        print(state.runtimeType.toString());
+        if (kDebugMode) {
+          print(state.runtimeType.toString());
+        }
         return Scaffold(
           appBar: AppBar(
             title: const Text('MovieFlix'),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {
-                  //dashboardBloc.add(DashboardSearchButtonNavigateEvent());
-                },
-              )
-            ],
           ),
           body: _buildBody(state),
           bottomNavigationBar: _buildBottomNavigationBar(context, state),
@@ -62,32 +46,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildBody(DashboardState state) {
-    // if (state is DashboardLoading) {
-    //   return Container(
-    //     color: Colors.red,
-    //   );
-    // } else if (state is NowPlayingSuccess) {
-    //   final nowPlayingSuccess = state as NowPlayingSuccess;
-    //   return NowPlayingTab(
-    //     nowPlayingMovies: nowPlayingSuccess.nowPlayingMovies,
-    //   );
-    // }
-    // //
-    // //else if (state is NowPlayingState) {
-    // //   return NowPlayingTab();
-    // // }
-    // else if (state is TopRatedState) {
-    //   return TopRatedTab();
-    // } else if (state is ProfileState) {
-    //   return ProfileTab();
-    // } else {
-    //   return Container(
-    //     color: Colors.pink,
-    //   );
-    // }
     switch (state.runtimeType) {
-      case NavigateToNowPalyingState:
-        return NowPlayingTab();
+      case NavigateToNowPlayingState:
+        return const NowPlayingTab();
+      case NavigateToTopRatedState:
+        return const TopRatedPage();
+      case NavigateToProfileState:
+        return const ProfileTab();
       default:
         return Container(
           color: Colors.purple,
@@ -101,7 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       onTap: (index) {
         _handleBottomNavigationTap(context, index);
       },
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.play_arrow),
           label: 'Now Playing',
@@ -119,7 +84,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   int _currentIndex(DashboardState state) {
-    if (state is NavigateToNowPalyingState) {
+    if (state is NavigateToNowPlayingState) {
       return 0;
     } else if (state is NavigateToTopRatedState) {
       return 1;
@@ -133,7 +98,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _handleBottomNavigationTap(BuildContext context, int index) {
     switch (index) {
       case 0:
-        dashboardBloc.add(NavigateToNowPalyingEvent());
+        dashboardBloc.add(NavigateToNowPlayingEvent());
         break;
       case 1:
         dashboardBloc.add(NavigateToTopRatedEvent());

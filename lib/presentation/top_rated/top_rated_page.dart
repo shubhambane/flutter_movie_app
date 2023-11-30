@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieflix/data/models/movie.dart';
-import 'package:movieflix/presentation/now_playing/bloc/now_playing_bloc.dart';
+import 'package:movieflix/presentation/top_rated/bloc/top_rated_bloc.dart';
 
-class NowPlayingTab extends StatefulWidget {
-  const NowPlayingTab({Key? key}) : super(key: key);
+class TopRatedPage extends StatefulWidget {
+  const TopRatedPage({Key? key}) : super(key: key);
 
   @override
-  State<NowPlayingTab> createState() => _NowPlayingTabState();
+  State<TopRatedPage> createState() => _TopRatedPageState();
 }
 
-class _NowPlayingTabState extends State<NowPlayingTab> {
-  final NowPlayingBloc nowPlayingBloc = NowPlayingBloc();
+class _TopRatedPageState extends State<TopRatedPage> {
+  final TopRatedBloc topRatedBloc = TopRatedBloc();
   TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    nowPlayingBloc.add(FetchNowPlayingEvent());
+    topRatedBloc.add(FetchTopRatedEvent());
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NowPlayingBloc, NowPlayingState>(
-      bloc: nowPlayingBloc,
-      listenWhen: (previous, current) => current is NowPlayingActionState,
-      buildWhen: (previous, current) => current is! NowPlayingActionState,
-      listener: (BuildContext context, NowPlayingState state) {},
+    return BlocConsumer<TopRatedBloc, TopRatedState>(
+      bloc: topRatedBloc,
+      listenWhen: (previous, current) => current is TopRatedActionState,
+      buildWhen: (previous, current) => current is! TopRatedActionState,
+      listener: (BuildContext context, TopRatedState state) {},
       builder: (context, state) {
         List<Movie> displayedMovies = [];
 
-        if (state is NowPlayingSuccess) {
+        if (state is TopRatedSuccess) {
           displayedMovies = _getDisplayedMovies(state, searchController.text);
         }
 
@@ -125,12 +125,12 @@ class _NowPlayingTabState extends State<NowPlayingTab> {
     );
   }
 
-  List<Movie> _getDisplayedMovies(NowPlayingState state, String searchQuery) {
-    if (state is NowPlayingSuccess) {
+  List<Movie> _getDisplayedMovies(TopRatedState state, String searchQuery) {
+    if (state is TopRatedSuccess) {
       if (searchQuery.isEmpty) {
-        return state.nowPlayingMovies;
+        return state.topRatedMovies;
       } else {
-        return state.nowPlayingMovies
+        return state.topRatedMovies
             .where((movie) =>
                 movie.title.toLowerCase().contains(searchQuery.toLowerCase()))
             .toList();

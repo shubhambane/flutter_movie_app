@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ProfileTab extends StatefulWidget {
-  ProfileTab({super.key});
+  const ProfileTab({super.key});
 
   @override
   State<ProfileTab> createState() => _ProfileTabState();
@@ -13,22 +13,28 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   void initState() {
-    // controller = WebViewController()
-    //   ..loadRequest(Uri.parse('https://www.linkedin.com/in/shubham-bane/'));
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            // Update loading bar.
+            if (progress == 100) {
+              if (mounted) {
+                setState(() {});
+              }
+            }
           },
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
         ),
       )
-      ..loadRequest(Uri.parse('https://www.linkedin.com/in/shubham-bane'));
+      ..loadRequest(
+        Uri.parse(
+          'https://github.com/shubhambane/flutter_movie_app',
+        ),
+      );
 
     super.initState();
   }

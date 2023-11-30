@@ -1,7 +1,6 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 import 'package:movieflix/data/models/movie.dart';
 import 'package:movieflix/repository/movie_repository.dart';
 
@@ -18,14 +17,12 @@ class NowPlayingBloc extends Bloc<NowPlayingEvent, NowPlayingState> {
       FetchNowPlayingEvent event, Emitter<NowPlayingState> emit) async {
     try {
       emit(NowPlayingLoading());
-      // Fetch data from the API using the repository
       final List<Movie> movies = await _movieRepository.fetchNowPlayingMovies();
       emit(NowPlayingSuccess(movies));
-      print('now playing movies fetched');
-
-      // print(movies[0].title);
+      if (kDebugMode) {
+        print('now playing movies fetched');
+      }
     } catch (error) {
-      // Handle errors appropriately (e.g., emit an error state)
       emit(
         NowPlayingError(
           error.toString(),

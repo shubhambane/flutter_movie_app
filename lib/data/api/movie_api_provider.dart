@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:movieflix/core/constants/api_constants.dart';
 import 'package:movieflix/data/models/movie.dart';
@@ -14,14 +15,16 @@ class MovieApiProvider {
 
         return results.map((movieData) => Movie.fromJson(movieData)).toList();
       } else {
-        // Log the error and return an empty list or throw a custom exception.
-        print(
-            'Failed to load now playing movies. Status code: ${response.statusCode}');
+        if (kDebugMode) {
+          print(
+              'Failed to load now playing movies. Status code: ${response.statusCode}');
+        }
         return [];
       }
     } catch (error) {
-      // Log the error and return an empty list or throw a custom exception.
-      print('Error fetching now playing movies: $error');
+      if (kDebugMode) {
+        print('Error fetching now playing movies: $error');
+      }
       return [];
     }
   }
@@ -36,14 +39,16 @@ class MovieApiProvider {
 
         return results.map((movieData) => Movie.fromJson(movieData)).toList();
       } else {
-        // Log the error and return an empty list or throw a custom exception.
-        print(
-            'Failed to load top-rated movies. Status code: ${response.statusCode}');
+        if (kDebugMode) {
+          print(
+              'Failed to load top-rated movies. Status code: ${response.statusCode}');
+        }
         return [];
       }
     } catch (error) {
-      // Log the error and return an empty list or throw a custom exception.
-      print('Error fetching top-rated movies: $error');
+      if (kDebugMode) {
+        print('Error fetching top-rated movies: $error');
+      }
       return [];
     }
   }

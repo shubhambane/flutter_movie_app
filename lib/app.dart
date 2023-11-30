@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         title: 'MovieFlix',
         themeMode: ThemeMode.system,
         theme: MAppTheme.lightTheme,
-        // darkTheme: MAppTheme.darkTheme,
+        darkTheme: MAppTheme.darkTheme,
         initialRoute: AppRoutes.main,
         routes: AppRoutes.routes,
       ),
