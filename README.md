@@ -35,13 +35,13 @@ This is a Flutter application by [Shubham Bane](https://www.linkedin.com/in/shub
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/MovieFlixApp.git
+   git clone https://github.com/shubhambane/flutter_movie_app.git
    ```
 
 2. **Navigate to the project directory:**
 
    ```bash
-   cd MovieFlixApp
+   cd flutter_movie_app
    ```
 
 3. **Install dependencies:**
@@ -58,18 +58,18 @@ This is a Flutter application by [Shubham Bane](https://www.linkedin.com/in/shub
 
 ## Screenshots
 
-- ![Screenshot 1](github_media/screenshot_1.png)
-- ![Screenshot 2](github_media/screenshot_2.png)
-- ![Screenshot 3](github_media/screenshot_3.png)
-- ![Screenshot 4](github_media/screenshot_4.png)
+- ![Screenshot 1](github_media/screenshot_1.jpg)
+- ![Screenshot 2](github_media/screenshot_2.jpg)
+- ![Screenshot 3](github_media/screenshot_3.jpg)
+- ![Screenshot 4](github_media/screenshot_4.jpg)
 
 
 ## Video Showcase
 
-[Link to Video Showcase](github_media/video_1.gif)
+[Video](github_media/video_1.gif)
 
 ## Code Repository
 
-[Link to GitHub Repository](https://github.com/your-username/MovieFlixApp)
+[Link to GitHub Repository](https://github.com/shubhambane/flutter_movie_app.git)
 
-Feel free to explore the code and provide feedback!
+Feel free to explore the code and provide feedback on [LinkedIn](https://www.linkedin.com/in/shubham-bane)!
